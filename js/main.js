@@ -78,15 +78,15 @@ const MAIN = {
         return x
     },
     grassCap() {
-        let x = 10+upgEffect('grass',1,0)+upgEffect('perk',1,0)+upgEffect('ap',4,0)+starTreeEff('progress',0,0)
+        let x = Decimal.add(10,upgEffect('grass',1,0)).add(upgEffect('perk',1,0)).add(upgEffect('ap',4,0)).add(starTreeEff('progress',0,0))
 
-        x *= upgEffect('unGrass',1,1)
+        x = x.mul(upgEffect('unGrass',1,1))
 
-        x *= starTreeEff('ring',7,1)
+        x = x.mul(starTreeEff('ring',7,1))
 
-        if (!hasUpgrade('constellation',3)) x /= tmp.compact
+        if (!hasUpgrade('constellation',3)) x = x.div(tmp.compact)
 
-        return Math.min(Math.max(10,Math.floor(x)),4000)
+        return Decimal.min(Decimal.max(10,Decimal.floor(x)),4000)
     },
     grassSpwan() {
         let x = 2.5
